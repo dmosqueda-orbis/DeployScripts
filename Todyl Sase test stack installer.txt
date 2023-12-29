@@ -1,0 +1,10 @@
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest https://download.todyl.com/sgn_connect/SGNConnect_Latest.exe -UseBasicParsing -OutFile "$env:temp\SGNConnect_Latest.exe"
+Start-Process -FilePath "$env:temp\SGNConnect_Latest.exe" -ArgumentList "/silent /deployKey NnApnfv2YEwZMawq6cXUtNJInDSs6o5AenaUUXUwxNyXgkgTDQbD0t2b2zGb3SgT" -Wait
+echo "LastExitCode: $LASTEXITCODE"
+IF ($LASTEXITCODE -eq 0) {
+	cd "C:\Program Files\SGN Connect\Current"
+	Start-Process .\sgnconnect.exe
+}
+
+Remove-Item "$env:temp\SGNConnect_Latest.exe"
